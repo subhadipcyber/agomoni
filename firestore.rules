@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+    
+    function incoming() { 
+      return request.resource.data; 
+    }
+    
+    function isValidOrder(data) {
+      return data.keys().hasAll(['customerName', 'contactNumber', 'address', 'productName', 'paymentMode', 'status', 'createdAt'])
+        && data.customerName is string && data.customerName.size() >= 2 && data.customerName.size() <= 100
+        && data.contactNumber is string && data.contactNumber.size() >= 5 && data.contactNumber.size() <= 25
+        && data.address is string && data.address.size() >= 5 && data.address.size() <= 500
+        && (!('email' in data) || data.email == null || (data.email is string && data.email.size() <= 100))
+        && data.productName is string && data.productName.size() >= 2 && data.productName.size() <= 150
+        && data.paymentMode in ['offline', 'online']
+        && data.status in ['pending', 'completed', 'cancelled']
+        && (!('paymentScreenshot' in data) || data.paymentScreenshot == null || (data.paymentScreenshot is string && data.paymentScreenshot.size() <= 350000))
+        && (!('productImage' in data) || data.productImage == null || (data.productImage is string && data.productImage.size() <= 350000))
+        && (!('adminNotes' in data) || data.adminNotes == null || (data.adminNotes is string && data.adminNotes.size() <= 500))
+        && data.createdAt is string && data.createdAt.size() <= 50;
+    }
+
+    function isValidSettings(data) {
+      return data.keys().hasAll(['storeName', 'updatedAt'])
+        && data.storeName is string && data.storeName.size() <= 100
+        && (!('logoUrl' in data) || data.logoUrl == null || (data.logoUrl is string && data.logoUrl.size() <= 350000))
+        && (!('qrCodeUrl' in data) || data.qrCodeUrl == null || (data.qrCodeUrl is string && data.qrCodeUrl.size() <= 350000))
+        && (!('upiId' in data) || data.upiId == null || (data.upiId is string && data.upiId.size() <= 100))
+        && (!('contactPhone' in data) || data.contactPhone == null || (data.contactPhone is string && data.contactPhone.size() <= 30))
+        && (!('tagline' in data) || data.tagline == null || (data.tagline is string && data.tagline.size() <= 200))
+        && data.updatedAt is string && data.updatedAt.size() <= 50;
+    }
+
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create: if isValidId(orderId) && isValidOrder(incoming());
+      allow update: if isValidId(orderId) && isValidOrder(incoming());
+      allow delete: if isValidId(orderId);
+    }
+
+    match /settings/{settingId} {
+      allow read: if true;
+      allow create, update: if isValidId(settingId) && isValidSettings(incoming());
+      allow delete: if isValidId(settingId);
+    }
+  }
+}

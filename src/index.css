@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-cream: #F7F2E7;
+    --neu-light: #FFFFFF;
+    --neu-dark: #DED5C5;
+    --maroon-deep: #5A1310;
+    --maroon-primary: #851C15;
+    --maroon-vibrant: #A82E25;
+    --maroon-light: #F2E3DF;
+  }
+
+  body {
+    background-color: #F7F2E7;
+    color: #5A1310;
+    font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: 'Cinzel Decorative', 'Playfair Display', Georgia, serif;
+  }
+
+  .font-serif-vintage {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+}
+
+/* Custom Neumorphic utility classes specifically calibrated for warm cream background */
+.neu-flat {
+  background: #F7F2E7;
+  box-shadow: 10px 10px 22px #DED5C5, -10px -10px 22px #FFFFFF;
+}
+
+.neu-flat-lg {
+  background: #F7F2E7;
+  box-shadow: 16px 16px 32px #D6CCBA, -16px -16px 32px #FFFFFF;
+}
+
+.neu-flat-sm {
+  background: #F7F2E7;
+  box-shadow: 5px 5px 12px #E2D8C9, -5px -5px 12px #FFFFFF;
+}
+
+.neu-inset {
+  background: #F4EFE3;
+  box-shadow: inset 4px 4px 8px #DDD4C3, inset -4px -4px 8px #FFFFFF;
+}
+
+.neu-inset-focus:focus-within {
+  background: #F4EFE3;
+  box-shadow: inset 4px 4px 9px #D5CAA5, inset -4px -4px 9px #FFFFFF, 0 0 0 2px rgba(133, 28, 21, 0.35);
+}
+
+.neu-pill-active {
+  background: #F4EFE3;
+  box-shadow: inset 4px 4px 8px #D9CFBD, inset -4px -4px 8px #FFFFFF;
+  color: #851C15;
+}
+
+.neu-btn {
+  background: #F7F2E7;
+  box-shadow: 6px 6px 14px #DDD4C3, -6px -6px 14px #FFFFFF;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neu-btn:hover {
+  box-shadow: 3px 3px 8px #DDD4C3, -3px -3px 8px #FFFFFF;
+  transform: translateY(1px);
+}
+
+.neu-btn:active {
+  box-shadow: inset 3px 3px 7px #D8CDBA, inset -3px -3px 7px #FFFFFF;
+  transform: translateY(2px);
+}
+
+.neu-btn-maroon {
+  background: linear-gradient(135deg, #9C2A22 0%, #6E1510 100%);
+  color: #FFFDF9;
+  box-shadow: 7px 7px 18px #D9CEBC, -7px -7px 18px #FFFFFF, inset 1px 1px 2px rgba(255, 255, 255, 0.3);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neu-btn-maroon:hover {
+  background: linear-gradient(135deg, #AA3027 0%, #7A1913 100%);
+  box-shadow: 4px 4px 12px #D9CEBC, -4px -4px 12px #FFFFFF, inset 1px 1px 2px rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.neu-btn-maroon:active {
+  background: linear-gradient(135deg, #6E1510 0%, #56100C 100%);
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.35), inset -2px -2px 6px rgba(255, 255, 255, 0.1);
+  transform: translateY(1px);
+}
+
+/* Vintage ornamental divider */
+.vintage-ornament {
+  background-image: radial-gradient(circle, #851C15 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+/* Subtle textured cream noise */
+.cream-pattern {
+  background-color: #F7F2E7;
+  background-image: radial-gradient(#851C15 0.35px, transparent 0.35px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F0E9DA;
+}
+::-webkit-scrollbar-thumb {
+  background: #C49793;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #851C15;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Agomoni Store",
+  "description": "Order exclusive handcrafted and curated products from Agomoni Store with custom payment and order tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

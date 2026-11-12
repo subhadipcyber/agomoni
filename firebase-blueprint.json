@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "Order": {
+      "title": "Order",
+      "description": "Customer order details for Agomoni Store products",
+      "type": "object",
+      "properties": {
+        "customerName": { "type": "string", "minLength": 2, "maxLength": 100 },
+        "contactNumber": { "type": "string", "minLength": 5, "maxLength": 25 },
+        "address": { "type": "string", "minLength": 5, "maxLength": 500 },
+        "email": { "type": "string", "maxLength": 100 },
+        "productName": { "type": "string", "minLength": 2, "maxLength": 150 },
+        "paymentMode": { "type": "string", "enum": ["offline", "online"] },
+        "paymentScreenshot": { "type": "string", "maxLength": 350000 },
+        "productImage": { "type": "string", "maxLength": 350000 },
+        "status": { "type": "string", "enum": ["pending", "completed", "cancelled"] },
+        "adminNotes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["customerName", "contactNumber", "address", "productName", "paymentMode", "status", "createdAt"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Store branding and payment settings",
+      "type": "object",
+      "properties": {
+        "storeName": { "type": "string", "maxLength": 100 },
+        "logoUrl": { "type": "string", "maxLength": 350000 },
+        "qrCodeUrl": { "type": "string", "maxLength": 350000 },
+        "upiId": { "type": "string", "maxLength": 100 },
+        "contactPhone": { "type": "string", "maxLength": 30 },
+        "tagline": { "type": "string", "maxLength": 200 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["storeName", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Collection storing exclusive product order requests"
+    },
+    "/settings/{settingId}": {
+      "schema": "StoreSettings",
+      "description": "Store configuration including logo, QR code, and shop details"
+    }
+  }
+}
